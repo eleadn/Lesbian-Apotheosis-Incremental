@@ -1,18 +1,23 @@
 # Lesbian Apotheosis Incremental
 
-## Prerequisites
+Welcome to the repository of Lesbian Apotheosis Incremental.
+This project is currently developed by its collaborators only and is not open to external contributions yet.
+
+## Installation
+
+### Prerequisites
 
 1) Visual Studio Code (https://code.visualstudio.com/)
 
-## Setup the sources
+### Setup the sources
 
-### Install npm
+#### Install npm
 
 1) Download the Node.js installer (https://nodejs.org/fr/download).
 2) During install, do not cross "automatically install the necessary tools".
 3) Open a console and type "node -v" and "npm -v", the version of node and npm should appear.
 
-### Necessary VS Code extensions
+#### Necessary VS Code extensions
 
 1) Go to Extensions on the left bar of VS Code.
 2) Search for "ESLint" (by Microsoft), "Prettier" (by Prettier), "Prettier ESLint" (by Rebecca Vest), and "HTML CSS Support" (by ecmel).
@@ -20,14 +25,14 @@
 4) In General Settings, search for "Format on Save" and cross "Format a file on save".
 5) Still in General Settings, search for "Default Formatter" and select "Prettier - Code Formatter".
 
-### Clone the repo
+#### Clone the repo
 
 1) Open Visual Studio Code and click on "Clone Git Repository", then "Clone for github".
 2) Get through the authentification process if necessary.
 3) Select the project "$name/Lesbian-Apotheosis-Incremental" and select repository destination.
 4) Open the repository.
 
-### Install dependancies
+#### Install dependencies
 
 1) Open a terminal inside VS Code (in the topbar : Terminal -> New Terminal).
 2) In the terminal, type "npm install".
