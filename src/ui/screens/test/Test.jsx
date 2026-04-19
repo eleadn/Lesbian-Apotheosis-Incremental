@@ -22,7 +22,7 @@ function Test() {
 					)
 				}
 			>
-				Test
+				+1 {tr(`${IDS.test.resources.NUMBER_TEST}.name`)}
 			</button>
 		</>
 	);
