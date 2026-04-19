@@ -1,4 +1,6 @@
 const TEST_IDS = {
+	layerName: "test",
+
 	resources: {
 		NUMBER_TEST: "numberTest",
 	},
