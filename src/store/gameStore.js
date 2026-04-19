@@ -3,11 +3,13 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import partialize from "./partialize";
 import migrations from "./migrations";
 import { createTestSlice } from "./slices/testSlice";
+import { createSettingsSlice } from "./slices/settingsSlice";
 
 const useGameStore = create(
 	persist(
 		(set, get) => ({
 			...createTestSlice(set, get),
+			...createSettingsSlice(set, get),
 		}),
 		{
 			name: "lesbian-apotheosis",
