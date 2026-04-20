@@ -5,7 +5,9 @@ const TEST_IDS = {
 		NUMBER_TEST: "numberTest",
 	},
 
-	upgrades: {},
+	upgrades: {
+		MULT_TEST: "multTest",
+	},
 
 	actions: {
 		CLICK_NUMBER_TEST: "clickNumberTest",
