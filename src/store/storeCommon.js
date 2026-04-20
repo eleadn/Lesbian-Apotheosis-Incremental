@@ -1,4 +1,4 @@
-import { collectEffects, computeTarget } from "../logic/engine/effects";
+import { getActionGain } from "../logic/engine/calculator";
 import REGISTRY from "../logic/registry";
 
 function createStoreCommon(set, get) {
@@ -6,12 +6,11 @@ function createStoreCommon(set, get) {
 		performAction: (layerName, actionId) => {
 			const state = get();
 			const action = REGISTRY[layerName].actions[actionId];
-			const effects = collectEffects(
+			const gain = getActionGain(
 				state[layerName].upgrades,
 				layerName,
-				action.target,
+				actionId,
 			);
-			const gain = computeTarget(action.baseValue, effects);
 
 			set((s) => ({
 				[layerName]: {

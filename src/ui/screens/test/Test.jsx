@@ -1,3 +1,4 @@
+import { getActionGain } from "../../../logic/engine/calculator";
 import IDS from "../../../logic/ids";
 import useGameStore from "../../../store/gameStore";
 import useLocale from "../../hooks/useLocale";
@@ -25,7 +26,14 @@ function Test() {
 					)
 				}
 			>
-				+1 {tr(`${IDS.test.resources.NUMBER_TEST}.name`)}
+				{tr(`${IDS.test.actions.CLICK_NUMBER_TEST}.title`, {
+					gain: getActionGain(
+						upgrades,
+						IDS.test.layerName,
+						IDS.test.actions.CLICK_NUMBER_TEST,
+					),
+					resource: tr(`${IDS.test.resources.NUMBER_TEST}.name`),
+				})}
 			</button>
 
 			<div>

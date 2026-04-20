@@ -18,8 +18,15 @@ function resolve(key, locale) {
 	return key.split(".").reduce((obj, k) => obj?.[k], locale);
 }
 
-function tr(key) {
-	return resolve(key, currentLocale) ?? resolve(key, fallbackLocale) ?? key;
+function tr(key, params = {}) {
+	let value =
+		resolve(key, currentLocale) ?? resolve(key, fallbackLocale) ?? key;
+
+	for (const [k, v] of Object.entries(params)) {
+		value = value.replace(`{${k}}`, v);
+	}
+
+	return value;
 }
 
 export { setLang, tr };

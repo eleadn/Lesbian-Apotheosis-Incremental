@@ -1,5 +1,8 @@
 {
 	"numberTest": {
 		"name": "Number Test"
+	},
+	"clickNumberTest": {
+		"title": "+{gain} {resource}"
 	}
 }
