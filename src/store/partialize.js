@@ -1,1 +1,6 @@
-export default () => {};
+export default function partialize(state) {
+	return {
+		test: state.test,
+		settings: state.settings,
+	};
+}
