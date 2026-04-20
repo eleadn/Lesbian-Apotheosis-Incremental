@@ -1,11 +1,17 @@
-import { computeTarget } from "../logic/engine/effects";
+import { collectEffects, computeTarget } from "../logic/engine/effects";
 import REGISTRY from "../logic/registry";
 
-function createStoreCommon(set) {
+function createStoreCommon(set, get) {
 	return {
 		performAction: (layerName, actionId) => {
+			const state = get();
 			const action = REGISTRY[layerName].actions[actionId];
-			const gain = computeTarget(action.baseValue);
+			const effects = collectEffects(
+				state[layerName].upgrades,
+				layerName,
+				action.target,
+			);
+			const gain = computeTarget(action.baseValue, effects);
 
 			set((s) => ({
 				[layerName]: {
@@ -17,6 +23,32 @@ function createStoreCommon(set) {
 					},
 				},
 			}));
+		},
+
+		buyUpgrade: (layerName, upgradeId) => {
+			const upgrade = REGISTRY[layerName].upgrades[upgradeId];
+
+			set((s) => {
+				const alreadyOwn = s[layerName].upgrades.includes(upgradeId);
+				const canAfford = upgrade.cost.every(
+					(c) => s[layerName].resources[c.resource] >= c.amount,
+				);
+
+				if (alreadyOwn || !canAfford) return s;
+
+				const newResources = { ...s[layerName].resources };
+				for (const c of upgrade.cost) {
+					newResources[c.resource] -= c.amount;
+				}
+
+				return {
+					[layerName]: {
+						...s[layerName],
+						resources: newResources,
+						upgrades: [...s[layerName].upgrades, upgradeId],
+					},
+				};
+			});
 		},
 	};
 }
