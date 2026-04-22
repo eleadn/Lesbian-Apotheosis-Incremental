@@ -4,14 +4,18 @@ import partialize from "./partialize";
 import migrations from "./migrations";
 import { createTestSlice } from "./slices/testSlice";
 import { createSettingsSlice } from "./slices/settingsSlice";
-import createStoreCommon from "./storeCommon";
+import {
+	createStoreCommonFunctions,
+	createStoreCommonProperties,
+} from "./storeCommon";
 
 const useGameStore = create(
 	persist(
 		(set, get) => ({
 			...createTestSlice(set, get),
 			...createSettingsSlice(set, get),
-			...createStoreCommon(set, get),
+			...createStoreCommonProperties(set, get),
+			...createStoreCommonFunctions(set, get),
 		}),
 		{
 			name: "lesbian-apotheosis",

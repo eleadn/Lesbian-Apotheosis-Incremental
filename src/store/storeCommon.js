@@ -1,8 +1,39 @@
 import { getActionGain } from "../logic/engine/calculator";
 import REGISTRY from "../logic/registry";
 
-function createStoreCommon(set, get) {
+function createStoreCommonProperties() {
 	return {
+		commonProperties: {
+			activeActions: [],
+		},
+	};
+}
+
+function createStoreCommonFunctions(set, get) {
+	return {
+		startAction: (layerName, actionId) => {
+			const action = REGISTRY[layerName].actions[actionId];
+
+			if ((action.baseDuration ?? 0) > 0) {
+				set((s) => ({
+					commonProperties: {
+						...s.commonProperties,
+						activeActions: [
+							...s.commonProperties.activeActions,
+							{
+								layerName,
+								actionId,
+								duration: action.baseDuration,
+								elapsed: 0,
+							},
+						],
+					},
+				}));
+			} else {
+				get().performAction(layerName, actionId);
+			}
+		},
+
 		performAction: (layerName, actionId) => {
 			const state = get();
 			const action = REGISTRY[layerName].actions[actionId];
@@ -52,4 +83,4 @@ function createStoreCommon(set, get) {
 	};
 }
 
-export default createStoreCommon;
+export { createStoreCommonProperties, createStoreCommonFunctions };

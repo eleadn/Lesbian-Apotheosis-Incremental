@@ -7,7 +7,7 @@ function Test() {
 	const tr = useLocale();
 	const numberTest = useGameStore((s) => s.test.resources.numberTest);
 	const upgrades = useGameStore((s) => s.test.upgrades);
-	const performAction = useGameStore((s) => s.performAction);
+	const startAction = useGameStore((s) => s.startAction);
 	const buyUpgrade = useGameStore((s) => s.buyUpgrade);
 
 	return (
@@ -19,7 +19,7 @@ function Test() {
 			</p>
 			<button
 				onClick={() =>
-					performAction(
+					startAction(
 						IDS.test.layerName,
 						IDS.test.actions.CLICK_NUMBER_TEST,
 						upgrades,
