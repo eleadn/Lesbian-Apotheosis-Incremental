@@ -8,6 +8,7 @@ import {
 	createStoreCommonFunctions,
 	createStoreCommonProperties,
 } from "./storeCommon";
+import createStoreTick from "./storeTick";
 
 const useGameStore = create(
 	persist(
@@ -16,6 +17,7 @@ const useGameStore = create(
 			...createSettingsSlice(set, get),
 			...createStoreCommonProperties(set, get),
 			...createStoreCommonFunctions(set, get),
+			...createStoreTick(set, get),
 		}),
 		{
 			name: "lesbian-apotheosis",
