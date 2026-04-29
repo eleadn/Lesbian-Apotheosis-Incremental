@@ -5,4 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
 	base: "/lesbian-apotheosis-incremental/",
 	plugins: [react()],
+	test: {
+		include: ["src/**/*.test.js", "tests/**/*.test.js"],
+	},
 });
