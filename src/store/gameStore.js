@@ -9,11 +9,13 @@ import {
 	createStoreCommonProperties,
 } from "./storeCommon";
 import createStoreTick from "./storeTick";
+import { createCityLayerSlice } from "./slices/cityLayerSlice";
 
 const useGameStore = create(
 	persist(
 		(set, get) => ({
 			...createTestSlice(set, get),
+			...createCityLayerSlice(set, get),
 			...createSettingsSlice(set, get),
 			...createStoreCommonProperties(set, get),
 			...createStoreCommonFunctions(set, get),
