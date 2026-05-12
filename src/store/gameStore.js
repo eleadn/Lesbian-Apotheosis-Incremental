@@ -1,15 +1,21 @@
+// MANDATORY
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import partialize from "./partialize";
 import migrations from "./migrations";
-import { createTestSlice } from "./slices/testSlice";
 import { createSettingsSlice } from "./slices/settingsSlice";
 import {
 	createStoreCommonFunctions,
 	createStoreCommonProperties,
 } from "./storeCommon";
-import createStoreTick from "./storeTick";
+import createTickRunner from "./storeTick";
+
+// GAME-SPECIFIC
+import { createTestSlice } from "./slices/testSlice";
 import { createCityLayerSlice } from "./slices/cityLayerSlice";
+import tickActiveActions from "./ticks/storeCommonTick";
+
+const tick = createTickRunner([tickActiveActions]);
 
 const useGameStore = create(
 	persist(
@@ -19,7 +25,7 @@ const useGameStore = create(
 			...createSettingsSlice(set, get),
 			...createStoreCommonProperties(set, get),
 			...createStoreCommonFunctions(set, get),
-			...createStoreTick(set, get),
+			tick: (dTime) => tick(dTime, get, set),
 		}),
 		{
 			name: "lesbian-apotheosis",
