@@ -1,4 +1,3 @@
-import IDS from "../../logic/ids";
 import useGameStore from "../../store/gameStore";
 
 export default function ActionButton({ layerName, actionId, children }) {

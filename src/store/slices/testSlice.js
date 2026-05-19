@@ -1,4 +1,4 @@
-import REGISTRY from "../../logic/registry";
+import { REGISTRY } from "../../logic/registries/registry";
 import { getInitialResources } from "./initialState";
 
 export function createTestSlice() {

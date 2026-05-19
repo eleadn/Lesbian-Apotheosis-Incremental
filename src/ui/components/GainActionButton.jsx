@@ -1,5 +1,5 @@
 import { getActionGain } from "../../logic/engine/calculator";
-import REGISTRY from "../../logic/registry";
+import { REGISTRY } from "../../logic/registries/registry";
 import useGameStore from "../../store/gameStore";
 import useLocale from "../hooks/useLocale";
 import ActionButton from "./ActionButton";

@@ -1,4 +1,4 @@
-import IDS from "../../../logic/ids";
+import { IDS } from "../../../logic/registries/registry";
 import GainActionButton from "../../components/GainActionButton";
 import ResourceDisplay from "../../components/ResourceDisplay";
 import UpgradeList from "../../components/UpgradeList";

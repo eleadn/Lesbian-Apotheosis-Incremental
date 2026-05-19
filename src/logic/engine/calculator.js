@@ -1,4 +1,4 @@
-import REGISTRY from "../registry";
+import { REGISTRY } from "../registries/registry";
 import { collectEffects, computeTarget } from "./effects";
 
 function getActionGain(upgrades, layerName, actionId) {

@@ -1,4 +1,4 @@
-import IDS from "../../logic/ids";
+import { IDS } from "../../logic/registries/registry";
 import useGameStore from "../../store/gameStore";
 import UpgradeButton from "./UpgradeButton";
 

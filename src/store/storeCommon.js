@@ -1,5 +1,5 @@
 import { getActionGain } from "../logic/engine/calculator";
-import REGISTRY from "../logic/registry";
+import { REGISTRY } from "../logic/registries/registry";
 
 function createStoreCommonProperties() {
 	return {

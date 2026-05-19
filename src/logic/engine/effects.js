@@ -1,5 +1,4 @@
-import IDS from "../ids";
-import REGISTRY from "../registry";
+import { IDS, REGISTRY } from "../registries/registry";
 
 function collectEffects(ownedUpgrades, layerName, targetId) {
 	const effects = [];
