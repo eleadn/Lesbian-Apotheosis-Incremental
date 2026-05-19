@@ -7,6 +7,10 @@ function Test() {
 	return (
 		<>
 			<ResourceDisplay
+				layerName={IDS.city.layerName}
+				resourceId={IDS.city.resources.DETECTION}
+			/>
+			<ResourceDisplay
 				layerName={IDS.test.layerName}
 				resourceId={IDS.test.resources.NUMBER_TEST}
 			/>

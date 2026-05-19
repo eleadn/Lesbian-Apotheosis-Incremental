@@ -22,4 +22,4 @@ function tickActiveActions(dTime, get, set) {
 	}
 }
 
-export default tickActiveActions;
+export { tickActiveActions };

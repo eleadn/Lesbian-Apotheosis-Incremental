@@ -13,9 +13,10 @@ import createTickRunner from "./storeTick";
 // GAME-SPECIFIC
 import { createTestSlice } from "./slices/testSlice";
 import { createCityLayerSlice } from "./slices/cityLayerSlice";
-import tickActiveActions from "./ticks/storeCommonTick";
+import { tickActiveActions } from "./ticks/storeCommonTick";
+import { tickCityDetection } from "./ticks/cityLayerTick";
 
-const tick = createTickRunner([tickActiveActions]);
+const tick = createTickRunner([tickActiveActions, tickCityDetection]);
 
 const useGameStore = create(
 	persist(
