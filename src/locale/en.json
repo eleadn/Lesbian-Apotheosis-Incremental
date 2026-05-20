@@ -4,5 +4,8 @@
 	},
 	"clickNumberTest": {
 		"title": "+{gain} {resource}"
+	},
+	"detection": {
+		"name": "Detection"
 	}
 }

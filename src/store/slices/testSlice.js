@@ -5,7 +5,6 @@ export function createTestSlice() {
 	return {
 		test: {
 			resources: getInitialResources(REGISTRY.test),
-			upgrades: [],
 		},
 	};
 }

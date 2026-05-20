@@ -6,7 +6,7 @@ import ActionButton from "./ActionButton";
 
 export default function GainActionButton({ layerName, actionId }) {
 	const tr = useLocale();
-	const upgrades = useGameStore((s) => s.test.upgrades);
+	const upgrades = useGameStore((s) => s.commonProperties.upgrades);
 
 	return (
 		<ActionButton layerName={layerName} actionId={actionId}>

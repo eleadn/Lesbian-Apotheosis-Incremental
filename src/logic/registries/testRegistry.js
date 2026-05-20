@@ -27,11 +27,22 @@ const TEST_REGISTRY = {
 
 	upgrades: {
 		[TEST_IDS.upgrades.MULT_TEST]: {
-			cost: [{ resource: TEST_IDS.resources.NUMBER_TEST, amount: 10 }],
+			cost: [
+				{
+					resource: {
+						scope: TEST_IDS.layerName,
+						id: TEST_IDS.resources.NUMBER_TEST,
+					},
+					amount: 10,
+				},
+			],
 			effects: [
 				{
 					type: COMMON_IDS.effectTypes.MULT,
-					target: TEST_IDS.resources.NUMBER_TEST,
+					target: {
+						scope: TEST_IDS.layerName,
+						id: TEST_IDS.resources.NUMBER_TEST,
+					},
 					value: 2,
 				},
 			],

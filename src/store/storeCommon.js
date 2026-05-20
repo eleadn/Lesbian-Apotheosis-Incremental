@@ -5,6 +5,7 @@ function createStoreCommonProperties() {
 	return {
 		commonProperties: {
 			activeActions: [],
+			upgrades: [],
 		},
 	};
 }
@@ -67,7 +68,7 @@ function createStoreCommonFunctions(set, get) {
 			const state = get();
 			const action = REGISTRY[layerName].actions[actionId];
 			const gain = getActionGain(
-				state[layerName].upgrades,
+				state.commonProperties.upgrades,
 				layerName,
 				actionId,
 			);
@@ -88,25 +89,42 @@ function createStoreCommonFunctions(set, get) {
 			const upgrade = REGISTRY[layerName].upgrades[upgradeId];
 
 			set((s) => {
-				const alreadyOwn = s[layerName].upgrades.includes(upgradeId);
+				const alreadyOwn = s.commonProperties.upgrades.some(
+					(u) =>
+						u.layerName === layerName && u.upgradeId === upgradeId,
+				);
 				const canAfford = upgrade.cost.every(
-					(c) => s[layerName].resources[c.resource] >= c.amount,
+					(c) =>
+						s[c.resource.scope].resources[c.resource.id] >=
+						c.amount,
 				);
 
 				if (alreadyOwn || !canAfford) return s;
 
-				const newResources = { ...s[layerName].resources };
+				const newResourcesByScope = {};
 				for (const c of upgrade.cost) {
-					newResources[c.resource] -= c.amount;
+					const scope = c.resource.scope;
+					if (!newResourcesByScope[scope]) {
+						newResourcesByScope[scope] = { ...s[scope].resources };
+					}
+					newResourcesByScope[scope][c.resource.id] -= c.amount;
 				}
 
-				return {
-					[layerName]: {
-						...s[layerName],
-						resources: newResources,
-						upgrades: [...s[layerName].upgrades, upgradeId],
-					},
+				const next = { ...s };
+				for (const [scope, resources] of Object.entries(
+					newResourcesByScope,
+				)) {
+					next[scope] = { ...s[scope], resources };
+				}
+				next.commonProperties = {
+					...s.commonProperties,
+					upgrades: [
+						...s.commonProperties.upgrades,
+						{ layerName, upgradeId },
+					],
 				};
+
+				return next;
 			});
 		},
 	};

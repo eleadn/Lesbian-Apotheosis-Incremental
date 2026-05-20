@@ -7,4 +7,10 @@ function getActionGain(upgrades, layerName, actionId) {
 	return computeTarget(action.baseValue, effects);
 }
 
-export { getActionGain };
+function resolveConstant(upgrades, layerName, constantId) {
+	const constant = REGISTRY[layerName].constants[constantId];
+	const effects = collectEffects(upgrades, layerName, constantId);
+	return computeTarget(constant.value, effects);
+}
+
+export { getActionGain, resolveConstant };

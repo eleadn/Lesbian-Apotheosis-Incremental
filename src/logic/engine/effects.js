@@ -1,14 +1,17 @@
 import { IDS, REGISTRY } from "../registries/registry";
 
-function collectEffects(ownedUpgrades, layerName, targetId) {
+function collectEffects(upgrades, targetScope, targetId) {
 	const effects = [];
 
-	for (const upgradeId of ownedUpgrades) {
-		const upgrade = REGISTRY[layerName].upgrades[upgradeId];
+	for (const owned of upgrades) {
+		const upgrade = REGISTRY[owned.layerName].upgrades[owned.upgradeId];
 
 		if (upgrade?.effects) {
 			for (const effect of upgrade.effects) {
-				if (effect.target === targetId) {
+				if (
+					effect.target.scope === targetScope &&
+					effect.target.id === targetId
+				) {
 					effects.push(effect);
 				}
 			}

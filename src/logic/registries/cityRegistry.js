@@ -30,7 +30,7 @@ const CITY_REGISTRY = {
 			baseValue: 100,
 		},
 		[CITY_IDS.resources.EXPOSITION]: {
-			baseValue: 0,
+			baseValue: 1,
 		},
 		[CITY_IDS.resources.DETECTION]: {
 			baseValue: 0,
