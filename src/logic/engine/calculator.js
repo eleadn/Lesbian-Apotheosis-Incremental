@@ -3,7 +3,8 @@ import { collectEffects, computeTarget } from "./effects";
 
 function getActionGain(upgrades, actionLayer, actionId) {
 	const action = REGISTRY[actionLayer].actions[actionId];
-	const effects = collectEffects(upgrades, action.target);
+	const target = action.target;
+	const effects = collectEffects(upgrades, target.layer, target.id);
 	return computeTarget(action.baseValue, effects);
 }
 

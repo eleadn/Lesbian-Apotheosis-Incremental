@@ -1,6 +1,6 @@
 import { IDS, REGISTRY } from "../registries/registry";
 
-function collectEffects(upgrades, target) {
+function collectEffects(upgrades, targetLayer, targetId) {
 	const effects = [];
 
 	for (const u of upgrades) {
@@ -9,8 +9,8 @@ function collectEffects(upgrades, target) {
 		if (upgrade?.effects) {
 			for (const effect of upgrade.effects) {
 				if (
-					effect.target.layer === target.layer &&
-					effect.target.id === target.id
+					effect.target.layer === targetLayer &&
+					effect.target.id === targetId
 				) {
 					effects.push(effect);
 				}
