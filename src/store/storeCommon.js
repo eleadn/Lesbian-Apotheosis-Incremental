@@ -12,8 +12,8 @@ function createStoreCommonProperties() {
 
 function createStoreCommonFunctions(set, get) {
 	return {
-		startAction: (layerName, actionId) => {
-			const action = REGISTRY[layerName].actions[actionId];
+		startAction: (actionLayer, actionId) => {
+			const action = REGISTRY[actionLayer].actions[actionId];
 			const {
 				performAction,
 				commonProperties: { activeActions },
@@ -21,7 +21,7 @@ function createStoreCommonFunctions(set, get) {
 
 			if ((action.baseDuration ?? 0) > 0) {
 				const activeAction = activeActions.find(
-					(a) => a.layerName === layerName,
+					(a) => a.layer === actionLayer,
 				);
 				if (activeAction) {
 					if (activeAction.actionId === actionId) {
@@ -32,11 +32,11 @@ function createStoreCommonFunctions(set, get) {
 							...s.commonProperties,
 							activeActions: [
 								...s.commonProperties.activeActions.filter(
-									(a) => a.layerName !== layerName,
+									(a) => a.layer !== actionLayer,
 								),
 								{
-									layerName,
-									actionId,
+									layer: actionLayer,
+									id: actionId,
 									duration: action.baseDuration,
 									elapsed: 0,
 								},
@@ -50,8 +50,8 @@ function createStoreCommonFunctions(set, get) {
 							activeActions: [
 								...s.commonProperties.activeActions,
 								{
-									layerName,
-									actionId,
+									layer: actionLayer,
+									id: actionId,
 									duration: action.baseDuration,
 									elapsed: 0,
 								},
@@ -60,67 +60,70 @@ function createStoreCommonFunctions(set, get) {
 					}));
 				}
 			} else {
-				performAction(layerName, actionId);
+				performAction(actionLayer, actionId);
 			}
 		},
 
-		performAction: (layerName, actionId) => {
+		performAction: (actionLayer, actionId) => {
 			const state = get();
-			const action = REGISTRY[layerName].actions[actionId];
+			const action = REGISTRY[actionLayer].actions[actionId];
 			const gain = getActionGain(
 				state.commonProperties.upgrades,
-				layerName,
+				actionLayer,
 				actionId,
 			);
+			const target = action.target;
 
 			set((s) => ({
-				[layerName]: {
-					...s[layerName],
+				[target.layer]: {
+					...s[target.layer],
 					resources: {
-						...s[layerName].resources,
-						[action.target]:
-							s[layerName].resources[action.target] + gain,
+						...s[target.layer].resources,
+						[target.id]:
+							state[target.layer].resources[target.id] + gain,
 					},
 				},
 			}));
 		},
 
-		buyUpgrade: (layerName, upgradeId) => {
-			const upgrade = REGISTRY[layerName].upgrades[upgradeId];
+		buyUpgrade: (upgradeLayer, upgradeId) => {
+			const upgrade = REGISTRY[upgradeLayer].upgrades[upgradeId];
 
 			set((s) => {
 				const alreadyOwn = s.commonProperties.upgrades.some(
-					(u) =>
-						u.layerName === layerName && u.upgradeId === upgradeId,
+					(u) => u.layer === upgradeLayer && u.id === upgradeId,
 				);
 				const canAfford = upgrade.cost.every(
 					(c) =>
-						s[c.resource.scope].resources[c.resource.id] >=
+						s[c.resource.layer].resources[c.resource.id] >=
 						c.amount,
 				);
 
 				if (alreadyOwn || !canAfford) return s;
 
-				const newResourcesByScope = {};
+				const newResourcesByLayer = {};
 				for (const c of upgrade.cost) {
-					const scope = c.resource.scope;
-					if (!newResourcesByScope[scope]) {
-						newResourcesByScope[scope] = { ...s[scope].resources };
+					const resourceLayer = c.resource.layer;
+					if (!newResourcesByLayer[resourceLayer]) {
+						newResourcesByLayer[resourceLayer] = {
+							...s[resourceLayer].resources,
+						};
 					}
-					newResourcesByScope[scope][c.resource.id] -= c.amount;
+					newResourcesByLayer[resourceLayer][c.resource.id] -=
+						c.amount;
 				}
 
 				const next = { ...s };
-				for (const [scope, resources] of Object.entries(
-					newResourcesByScope,
+				for (const [resourceLayer, resources] of Object.entries(
+					newResourcesByLayer,
 				)) {
-					next[scope] = { ...s[scope], resources };
+					next[resourceLayer] = { ...s[resourceLayer], resources };
 				}
 				next.commonProperties = {
 					...s.commonProperties,
 					upgrades: [
 						...s.commonProperties.upgrades,
-						{ layerName, upgradeId },
+						{ layer: upgradeLayer, id: upgradeId },
 					],
 				};
 

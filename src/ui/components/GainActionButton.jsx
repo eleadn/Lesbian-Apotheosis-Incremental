@@ -4,16 +4,16 @@ import useGameStore from "../../store/gameStore";
 import useLocale from "../hooks/useLocale";
 import ActionButton from "./ActionButton";
 
-export default function GainActionButton({ layerName, actionId }) {
+export default function GainActionButton({ actionLayer, actionId }) {
 	const tr = useLocale();
 	const upgrades = useGameStore((s) => s.commonProperties.upgrades);
 
 	return (
-		<ActionButton layerName={layerName} actionId={actionId}>
+		<ActionButton actionLayer={actionLayer} actionId={actionId}>
 			{tr(`${actionId}.title`, {
-				gain: getActionGain(upgrades, layerName, actionId),
+				gain: getActionGain(upgrades, actionLayer, actionId),
 				resource: tr(
-					`${REGISTRY[layerName].actions[actionId].target}.name`,
+					`${REGISTRY[actionLayer].actions[actionId].target.id}.name`,
 				),
 			})}
 		</ActionButton>

@@ -1,10 +1,12 @@
-import { REGISTRY } from "../../logic/registries/registry";
+import { IDS, REGISTRY } from "../../logic/registries/registry";
 import { getInitialResources } from "./initialState";
 
 export function createTestSlice() {
+	const TEST_LAYER = IDS.test.LAYER_NAME;
+
 	return {
-		test: {
-			resources: getInitialResources(REGISTRY.test),
+		[TEST_LAYER]: {
+			resources: getInitialResources(REGISTRY[TEST_LAYER]),
 		},
 	};
 }

@@ -1,5 +1,5 @@
 const CITY_IDS = {
-	layerName: "cityLayer",
+	LAYER_NAME: "cityLayer",
 
 	resources: {
 		MONEY: "money",

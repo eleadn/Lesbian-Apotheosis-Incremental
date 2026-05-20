@@ -1,7 +1,7 @@
 import COMMON_IDS from "./commonRegistry";
 
 const TEST_IDS = {
-	layerName: "test",
+	LAYER_NAME: "test",
 
 	resources: {
 		NUMBER_TEST: "numberTest",
@@ -30,7 +30,7 @@ const TEST_REGISTRY = {
 			cost: [
 				{
 					resource: {
-						scope: TEST_IDS.layerName,
+						layer: TEST_IDS.LAYER_NAME,
 						id: TEST_IDS.resources.NUMBER_TEST,
 					},
 					amount: 10,
@@ -40,7 +40,7 @@ const TEST_REGISTRY = {
 				{
 					type: COMMON_IDS.effectTypes.MULT,
 					target: {
-						scope: TEST_IDS.layerName,
+						layer: TEST_IDS.LAYER_NAME,
 						id: TEST_IDS.resources.NUMBER_TEST,
 					},
 					value: 2,
@@ -51,7 +51,10 @@ const TEST_REGISTRY = {
 
 	actions: {
 		[TEST_IDS.actions.CLICK_NUMBER_TEST]: {
-			target: TEST_IDS.resources.NUMBER_TEST,
+			target: {
+				layer: TEST_IDS.LAYER_NAME,
+				id: TEST_IDS.resources.NUMBER_TEST,
+			},
 			baseValue: 1,
 			baseDuration: 1,
 		},

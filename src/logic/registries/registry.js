@@ -9,8 +9,8 @@ const IDS = {
 };
 
 const REGISTRY = {
-	[TEST_IDS.layerName]: TEST_REGISTRY,
-	[CITY_IDS.layerName]: CITY_REGISTRY,
+	[TEST_IDS.LAYER_NAME]: TEST_REGISTRY,
+	[CITY_IDS.LAYER_NAME]: CITY_REGISTRY,
 };
 
 export { IDS, REGISTRY };

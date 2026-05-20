@@ -2,24 +2,23 @@ import { IDS } from "../../logic/registries/registry";
 import useGameStore from "../../store/gameStore";
 import UpgradeButton from "./UpgradeButton";
 
-export default function UpgradeList({ layerName }) {
+export default function UpgradeList({ upgradesLayer }) {
 	const upgrades = useGameStore((s) => s.commonProperties.upgrades);
 
 	return (
 		<div>
-			{Object.values(IDS[layerName].upgrades)
+			{Object.values(IDS[upgradesLayer].upgrades)
 				.filter(
 					(upgradeId) =>
 						!upgrades.some(
 							(u) =>
-								u.layerName === layerName &&
-								u.upgradeId === upgradeId,
+								u.layer === upgradesLayer && u.id === upgradeId,
 						),
 				)
 				.map((upgradeId) => (
 					<UpgradeButton
 						key={upgradeId}
-						layerName={layerName}
+						upgradeLayer={upgradesLayer}
 						upgradeId={upgradeId}
 					/>
 				))}

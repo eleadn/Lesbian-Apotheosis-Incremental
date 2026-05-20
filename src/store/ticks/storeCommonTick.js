@@ -18,7 +18,7 @@ function tickActiveActions(dTime, get, set) {
 
 	const perform = get().performAction;
 	for (const a of completed) {
-		perform(a.layerName, a.actionId);
+		perform(a.layer, a.id);
 	}
 }
 

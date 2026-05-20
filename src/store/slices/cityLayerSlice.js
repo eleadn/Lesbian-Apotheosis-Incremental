@@ -1,11 +1,12 @@
-import { CITY_IDS } from "../../logic/registries/cityRegistry";
-import { REGISTRY } from "../../logic/registries/registry";
+import { IDS, REGISTRY } from "../../logic/registries/registry";
 import { getInitialResources } from "./initialState";
 
 export function createCityLayerSlice() {
+	const CITY_LAYER = IDS.city.LAYER_NAME;
+
 	return {
-		[CITY_IDS.layerName]: {
-			resources: getInitialResources(REGISTRY[CITY_IDS.layerName]),
+		[CITY_LAYER]: {
+			resources: getInitialResources(REGISTRY[CITY_LAYER]),
 		},
 	};
 }
