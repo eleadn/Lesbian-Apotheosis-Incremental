@@ -1,4 +1,5 @@
 import { IDS } from "../../../logic/registries/registry";
+import CityTimer from "../../components/cityTimer";
 import GainActionButton from "../../components/GainActionButton";
 import ResourceDisplay from "../../components/ResourceDisplay";
 import UpgradeList from "../../components/UpgradeList";
@@ -12,10 +13,7 @@ function Test() {
 
 	return (
 		<>
-			<ResourceDisplay
-				resourceLayer={CITY_LAYER}
-				resourceId={DETECTION}
-			/>
+			<CityTimer />
 			<ResourceDisplay
 				resourceLayer={TEST_LAYER}
 				resourceId={NUMBER_TEST}

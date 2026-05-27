@@ -8,4 +8,8 @@ function getDetectionThreshold(upgrades) {
 	return resolveConstant(upgrades, CITY_LAYER, DETECTION_THRESHOLD);
 }
 
-export { getDetectionThreshold };
+function getRemainingTime(threshold, detection, exposition) {
+	return exposition > 0 ? (threshold - detection) / exposition : Infinity;
+}
+
+export { getDetectionThreshold, getRemainingTime };
