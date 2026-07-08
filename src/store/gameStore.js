@@ -7,7 +7,8 @@ import { createSettingsSlice } from "./slices/settingsSlice";
 import {
 	createStoreCommonFunctions,
 	createStoreCommonProperties,
-} from "./storeCommon";
+} from "./actions/commonActions";
+import { createStoreCommonUpgradeFunctions } from "./actions/commonUpgrades";
 import createTickRunner from "./storeTick";
 
 // GAME-SPECIFIC
@@ -26,6 +27,7 @@ const useGameStore = create(
 			...createSettingsSlice(set, get),
 			...createStoreCommonProperties(set, get),
 			...createStoreCommonFunctions(set, get),
+			...createStoreCommonUpgradeFunctions(set, get),
 			tick: (dTime) => tick(dTime, get, set),
 		}),
 		{
