@@ -1,5 +1,5 @@
 import { IDS } from "../../../logic/registries/registry";
-import CityTimer from "../../components/cityTimer";
+import CityTimer from "../../components/CityTimer";
 import GainActionButton from "../../components/GainActionButton";
 import ResourceDisplay from "../../components/ResourceDisplay";
 import UpgradeList from "../../components/UpgradeList";
