@@ -1,4 +1,4 @@
-import REGISTRY from "../src/logic/registry";
+import { REGISTRY } from "../src/logic/registries/registry";
 import { describe, test, expect, beforeAll } from "vitest";
 import { readdirSync } from "fs";
 
